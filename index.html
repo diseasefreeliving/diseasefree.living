@@ -471,27 +471,28 @@
 
 <script>
 (function() {
-  var API = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fdrvirendersodhi.substack.com%2Ffeed&count=3';
+  var API = 'https://drvirendersodhi.substack.com/api/v1/posts?limit=3';
+  var BASE = 'https://drvirendersodhi.substack.com/p/';
   var grid = document.getElementById('substack-posts');
   fetch(API)
     .then(function(r){ return r.json(); })
-    .then(function(d) {
-      if (!d.items || !d.items.length) throw new Error('No items');
-      grid.innerHTML = d.items.map(function(item) {
-        var date = new Date(item.pubDate).toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-        var desc = item.description.replace(/<[^>]+>/g, '').substring(0, 160).trim();
-        if (desc.length === 160) desc += '&hellip;';
-        return '<a class="substack-card" href="' + item.link + '" target="_blank" rel="noopener">' +
+    .then(function(posts) {
+      if (!posts || !posts.length) throw new Error('empty');
+      grid.innerHTML = posts.map(function(p) {
+        var date = new Date(p.post_date).toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+        var desc = (p.subtitle || '').substring(0, 160);
+        if (desc.length === 160) desc += '…';
+        return '<a class="substack-card" href="' + BASE + p.slug + '" target="_blank" rel="noopener">' +
           '<div class="substack-date">' + date + '</div>' +
-          '<div class="substack-title">' + item.title + '</div>' +
+          '<div class="substack-title">' + p.title + '</div>' +
           '<div class="substack-desc">' + desc + '</div>' +
-          '<div class="substack-read">Read &rarr;</div>' +
+          '<div class="substack-read">Read →</div>' +
         '</a>';
       }).join('');
     })
     .catch(function() {
       grid.innerHTML = '<a class="substack-card substack-fallback" href="https://substack.com/@drvirendersodhi" target="_blank" rel="noopener">' +
-        '<div class="substack-title">Read Dr. Sodhi's latest writing on Substack &rarr;</div>' +
+        '<div class="substack-title">Read Dr. Sodhi's latest writing on Substack →</div>' +
         '</a>';
     });
 })();
