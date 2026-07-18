@@ -272,6 +272,55 @@
       display: flex; align-items: center;
     }
     .social-links a:hover { color: var(--white); }
+
+    .substack-section {
+      background: var(--navy-mid);
+      padding: 72px 60px;
+    }
+    .substack-inner { max-width: 1100px; margin: 0 auto; }
+    .substack-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; flex-wrap: wrap;
+      gap: 20px; margin-bottom: 40px;
+    }
+    .section-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      color: var(--blue); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .substack-header h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 32px; color: var(--white); margin: 0;
+    }
+    .substack-follow {
+      display: flex; align-items: center;
+      background: rgba(255,200,60,0.12); border: 1px solid var(--gold);
+      color: var(--gold); padding: 10px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      white-space: nowrap; transition: background 0.2s;
+    }
+    .substack-follow:hover { background: rgba(255,200,60,0.22); }
+    .substack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .substack-loading { color: var(--muted); font-size: 16px; padding: 24px 0; }
+    .substack-card {
+      background: var(--navy); border: 1px solid rgba(26,79,200,0.2);
+      border-radius: 14px; padding: 28px 24px;
+      text-decoration: none; display: flex; flex-direction: column;
+      gap: 12px; transition: border-color 0.2s, transform 0.2s;
+    }
+    .substack-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .substack-date { font-size: 12px; color: var(--muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .substack-title { font-family: "Playfair Display", serif; font-size: 19px; color: var(--white); line-height: 1.4; }
+    .substack-desc { font-size: 14px; color: var(--muted); line-height: 1.65; flex: 1; }
+    .substack-read { font-size: 13px; font-weight: 700; color: var(--blue); margin-top: 4px; }
+    .substack-fallback .substack-title { font-size: 17px; }
+    @media (max-width: 700px) {
+      .substack-section { padding: 48px 24px; }
+      .substack-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -400,6 +449,54 @@
   </div>
 </section>
 
+
+<!-- SUBSTACK FEED -->
+<section class="substack-section" id="insights">
+  <div class="substack-inner">
+    <div class="substack-header">
+      <div>
+        <div class="section-tag">Fresh from Substack</div>
+        <h2>Latest insights from Dr. Sodhi</h2>
+      </div>
+      <a href="https://substack.com/@drvirendersodhi" target="_blank" rel="noopener" class="substack-follow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:8px;flex-shrink:0"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        Follow on Substack
+      </a>
+    </div>
+    <div class="substack-grid" id="substack-posts">
+      <div class="substack-loading">Loading latest articles&hellip;</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var API = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fdrvirendersodhi.substack.com%2Ffeed&count=3';
+  var grid = document.getElementById('substack-posts');
+  fetch(API)
+    .then(function(r){ return r.json(); })
+    .then(function(d) {
+      if (!d.items || !d.items.length) throw new Error('No items');
+      grid.innerHTML = d.items.map(function(item) {
+        var date = new Date(item.pubDate).toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+        var desc = item.description.replace(/<[^>]+>/g, '').substring(0, 160).trim();
+        if (desc.length === 160) desc += '&hellip;';
+        return '<a class="substack-card" href="' + item.link + '" target="_blank" rel="noopener">' +
+          '<div class="substack-date">' + date + '</div>' +
+          '<div class="substack-title">' + item.title + '</div>' +
+          '<div class="substack-desc">' + desc + '</div>' +
+          '<div class="substack-read">Read &rarr;</div>' +
+        '</a>';
+      }).join('');
+    })
+    .catch(function() {
+      grid.innerHTML = '<a class="substack-card substack-fallback" href="https://substack.com/@drvirendersodhi" target="_blank" rel="noopener">' +
+        '<div class="substack-title">Read Dr. Sodhi's latest writing on Substack &rarr;</div>' +
+        '</a>';
+    });
+})();
+</script>
+
 <!-- REGISTER -->
 <section class="register-section" id="register">
   <h2>Reserve your free spot</h2>
@@ -433,6 +530,9 @@
   <p><a href="https://instagram.com/dr.virendersodhi">@dr.virendersodhi</a></p>
 
   <div class="social-links">
+    <a href="https://substack.com/@drvirendersodhi" target="_blank" rel="noopener" aria-label="Substack">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+    </a>
     <a href="https://instagram.com/dr.virendersodhi" target="_blank" rel="noopener" aria-label="Instagram">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
     </a>
