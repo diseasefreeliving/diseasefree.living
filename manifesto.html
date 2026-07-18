@@ -249,6 +249,55 @@
       .hero-stat .number { font-size: 42px; }
       .gold-callout { padding: 24px; }
     }
+
+    .wwd-section { background: var(--navy); padding: 80px 60px; }
+    .wwd-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag-light {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      color: var(--blue); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .wwd-section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 36px; color: var(--white); margin-bottom: 12px;
+    }
+    .wwd-sub {
+      font-size: 17px; color: var(--muted); margin-bottom: 48px;
+      max-width: 540px; line-height: 1.6;
+    }
+    .wwd-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .wwd-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(26,79,200,0.2);
+      border-radius: 16px; padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: border-color 0.2s;
+    }
+    .wwd-card:hover { border-color: rgba(26,79,200,0.5); }
+    .wwd-icon {
+      width: 52px; height: 52px;
+      background: rgba(26,79,200,0.15);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); margin-bottom: 4px;
+    }
+    .wwd-title {
+      font-size: 17px; font-weight: 700; color: var(--white); line-height: 1.4;
+    }
+    .wwd-desc { font-size: 15px; color: var(--muted); line-height: 1.7; flex: 1; }
+    .wwd-link {
+      font-size: 13px; font-weight: 700; color: var(--blue);
+      text-decoration: none; margin-top: 4px;
+      transition: color 0.2s;
+    }
+    .wwd-link:hover { color: var(--blue-lt); }
+    @media (max-width: 700px) {
+      .wwd-section { padding: 56px 24px; }
+      .wwd-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -259,7 +308,6 @@
     <a href="about.html" class="nav-link">About Dr. Sodhi</a>
     <a href="manifesto.html" class="nav-link" style="color:var(--white)">Why Disease is Optional?</a>
   </div>
-  <a href="index.html#register" class="cta-btn">Reserve your spot</a>
 </nav>
 
 <!-- HERO -->
@@ -480,6 +528,68 @@
       <div class="pillar-num">05</div>
       <div class="pillar-title">Know Your Numbers</div>
       <div class="pillar-desc">Biomarker testing tells you what is actually happening inside. Not just whether you are sick, but how far you are from optimal &mdash; before symptoms force the conversation.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHAT WE DO -->
+<section class="wwd-section">
+  <div class="wwd-inner">
+    <div class="section-tag-light">What we do</div>
+    <h2>Disease Free Living in practice</h2>
+    <p class="wwd-sub">We work upstream. Before the diagnosis. Before the threshold is crossed. Here is how.</p>
+    <div class="wwd-grid">
+
+      <div class="wwd-card">
+        <div class="wwd-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="wwd-title">Live Education Sessions</div>
+        <div class="wwd-desc">Monthly live webinars with Dr. Sodhi covering the upstream causes of specific conditions &mdash; practical, evidence-based, and free to attend. No slides. No pitch. Just the real conversation.</div>
+      </div>
+
+      <div class="wwd-card">
+        <div class="wwd-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="wwd-title">1:1 Consultations with Dr. Sodhi</div>
+        <div class="wwd-desc">Deep-dive clinical sessions that combine Ayurvedic constitutional assessment with advanced biomarker testing. We look at the whole person &mdash; not just the symptom that brought you in.</div>
+      </div>
+
+      <div class="wwd-card">
+        <div class="wwd-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="wwd-title">The DFL Platform <span style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;vertical-align:middle;margin-left:8px;">COMING SOON</span></div>
+        <div class="wwd-desc">An AI-powered personalised health platform that combines your Ayurvedic constitution, biomarker data, and lifestyle patterns to give you daily, actionable guidance &mdash; designed by Dr. Sodhi, built for you.</div>
+      </div>
+
+      <div class="wwd-card">
+        <div class="wwd-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="wwd-title">The First 100 Community</div>
+        <div class="wwd-desc">A founding cohort of people committed to building health before disease arrives. Early access to the platform, direct access to Dr. Sodhi, and a community that takes prevention seriously.</div>
+      </div>
+
+      <div class="wwd-card">
+        <div class="wwd-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </div>
+        <div class="wwd-title">Weekly Insights on Substack</div>
+        <div class="wwd-desc">Every week, Dr. Sodhi writes about one aspect of preventive health &mdash; the science, the clinical experience, and what it means for your daily life. Free to read, free to share.</div>
+        <a href="https://substack.com/@drvirendersodhi" target="_blank" rel="noopener" class="wwd-link">Read on Substack &rarr;</a>
+      </div>
+
+      <div class="wwd-card">
+        <div class="wwd-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="wwd-title">Personalised Lifestyle Protocols</div>
+        <div class="wwd-desc">For those who work with Dr. Sodhi directly: a written protocol covering food, sleep, movement, supplementation, and specific herbal interventions &mdash; calibrated to your constitution and your current biology.</div>
+      </div>
+
     </div>
   </div>
 </section>
